@@ -33,9 +33,23 @@ class Tour
      */
     private $base_cost;
 
+    /**
+     * One Tour has many ClientTourCosts
+     * @ORM\OneToMany(targetEntity="ClientTourCost", mappedBy="tour")
+     */
+    private $clientTourCosts;
+
+    /**
+     * Client constructor.
+     */
     public function __construct()
     {
-        $this->clients_collection = new ArrayCollection();
+        $this->clientTourCosts = new ArrayCollection;
+    }
+
+    public function getClientTourCosts()
+    {
+        return $this->clientTourCosts->toArray();
     }
 
     public function getId()
@@ -85,6 +99,6 @@ class Tour
      */
     public function __toString(): string
     {
-        return $this->name.' '.$this->date->format('D-m-Y');
+        return $this->name.' '.$this->date->format('d-m-Y');
     }
 }

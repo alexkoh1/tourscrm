@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\ClientsToursCost;
+use App\Entity\ClientTourCost;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method ClientsToursCost|null find($id, $lockMode = null, $lockVersion = null)
- * @method ClientsToursCost|null findOneBy(array $criteria, array $orderBy = null)
- * @method ClientsToursCost[]    findAll()
- * @method ClientsToursCost[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ClientTourCost|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ClientTourCost|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ClientTourCost[]    findAll()
+ * @method ClientTourCost[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ClientsToursCostRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, ClientsToursCost::class);
+        parent::__construct($registry, ClientTourCost::class);
     }
 
 //    /**
-//     * @return ClientsToursCost[] Returns an array of ClientsToursCost objects
+//     * @return ClientTourCost[] Returns an array of ClientTourCost objects
 //     */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class ClientsToursCostRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ClientsToursCost
+    public function findOneBySomeField($value): ?ClientTourCost
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')

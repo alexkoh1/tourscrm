@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +31,20 @@ class Client
      * @ORM\Column(type="string", length=10)
      */
     private $phone;
+
+    /**
+     * One Client has many ClientTourCosts
+     * @ORM\OneToMany(targetEntity="ClientTourCost", mappedBy="client")
+     */
+    private $clientTourCosts;
+
+    /**
+     * Client constructor.
+     */
+    public function __construct()
+    {
+        $this->clientTourCosts = new ArrayCollection;
+    }
 
     public function getId()
     {
@@ -70,6 +85,22 @@ class Client
         $this->phone = $phone;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClientTourCosts()
+    {
+        return $this->clientTourCosts->toArray();
+    }
+
+    /**
+     * @param mixed $clientTourCosts
+     */
+    public function setClientTourCosts($clientTourCosts)
+    {
+        $this->clientTourCosts = $clientTourCosts;
     }
 
     public function __toString()

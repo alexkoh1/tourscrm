@@ -2,26 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\ClientsToursCost;
+use App\Entity\ClientTourCost;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ClientsToursCostType extends AbstractType
+class ClientTourCostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('cost')
-            ->add('client_id')
-            ->add('tour_id')
+            ->add('client')
+            ->add('tour')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ClientsToursCost::class,
+            'data_class' => ClientTourCost::class,
         ]);
     }
 }
