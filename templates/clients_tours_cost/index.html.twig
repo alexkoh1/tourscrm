@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ClientsToursCost index{% endblock %}
+
+{% block body %}
+    <h1>ClientsToursCost index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Client</th>
+                <th>Tour</th>
+                <th>Cost</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for clients_tours_cost in clients_tours_costs %}
+            <tr>
+                <td>{{ clients_tours_cost.id }}</td>
+                <td>{{ clients_tours_cost.clientId.name }}</td>
+                <td>{{ clients_tours_cost.tourId.name }}</td>
+                <td>{{ clients_tours_cost.cost }}</td>
+                <td>
+                    <a href="{{ path('clients_tours_cost_show', {'id': clients_tours_cost.id}) }}">show</a>
+                    <a href="{{ path('clients_tours_cost_edit', {'id': clients_tours_cost.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('clients_tours_cost_new') }}">Create new</a>
+{% endblock %}

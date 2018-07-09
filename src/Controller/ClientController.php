@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Client;
-use App\Form\Client1Type;
+use App\Form\ClientType;
 use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class ClientController extends Controller
     public function new(Request $request): Response
     {
         $client = new Client();
-        $form = $this->createForm(Client1Type::class, $client);
+        $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class ClientController extends Controller
      */
     public function edit(Request $request, Client $client): Response
     {
-        $form = $this->createForm(Client1Type::class, $client);
+        $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

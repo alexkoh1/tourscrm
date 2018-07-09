@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ClientsToursCost{% endblock %}
+
+{% block body %}
+    <h1>ClientsToursCost</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ clients_tours_cost.id }}</td>
+            </tr>
+            <tr>
+                <th>Cost</th>
+                <td>{{ clients_tours_cost.cost }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('clients_tours_cost_index') }}">back to list</a>
+
+    <a href="{{ path('clients_tours_cost_edit', {'id': clients_tours_cost.id}) }}">edit</a>
+
+    {{ include('clients_tours_cost/_delete_form.html.twig') }}
+{% endblock %}

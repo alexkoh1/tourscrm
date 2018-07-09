@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ClientsToursCost{% endblock %}
+
+{% block body %}
+    <h1>Create new ClientsToursCost</h1>
+
+    {{ include('clients_tours_cost/_form.html.twig') }}
+
+    <a href="{{ path('clients_tours_cost_index') }}">back to list</a>
+{% endblock %}

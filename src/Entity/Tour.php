@@ -33,11 +33,6 @@ class Tour
      */
     private $base_cost;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Client", mappedBy="tour")
-     */
-    private $clients_collection;
-
     public function __construct()
     {
         $this->clients_collection = new ArrayCollection();
@@ -85,42 +80,11 @@ class Tour
     }
 
     /**
-     * @return Collection|Client[]
-     */
-    public function getClientsCollection(): Collection
-    {
-        return $this->clients_collection;
-    }
-
-    public function addClientsCollection(Client $clientsCollection): self
-    {
-        if (!$this->clients_collection->contains($clientsCollection)) {
-            $this->clients_collection[] = $clientsCollection;
-            $clientsCollection->setTour($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClientsCollection(Client $clientsCollection): self
-    {
-        if ($this->clients_collection->contains($clientsCollection)) {
-            $this->clients_collection->removeElement($clientsCollection);
-            // set the owning side to null (unless already changed)
-            if ($clientsCollection->getTour() === $this) {
-                $clientsCollection->setTour(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * Generates the magic method
      *
      */
     public function __toString(): string
     {
-        return $this->name;
+        return $this->name.' '.$this->date->format('D-m-Y');
     }
 }

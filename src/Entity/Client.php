@@ -31,11 +31,6 @@ class Client
      */
     private $phone;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Tour", inversedBy="clients_collection")
-     */
-    private $tour;
-
     public function getId()
     {
         return $this->id;
@@ -77,15 +72,8 @@ class Client
         return $this;
     }
 
-    public function getTour(): ?Tour
+    public function __toString()
     {
-        return $this->tour;
-    }
-
-    public function setTour(?Tour $tour): self
-    {
-        $this->tour = $tour;
-
-        return $this;
+        return $this->name;
     }
 }
