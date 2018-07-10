@@ -23,15 +23,6 @@
                 <th>Base_cost</th>
                 <td>{{ tour.baseCost }}</td>
             </tr>
-            <tr>
-                <th>Clients</th>
-                <td>
-                    {% for clientTourCost in tour.clientTourCosts %}
-                        <a href="{{ path('client_show', {'id': clientTourCost.client.id}) }}">{{ clientTourCost.client
-                            }}</a>
-                    {% endfor %}
-                </td>
-            </tr>
         </tbody>
     </table>
 

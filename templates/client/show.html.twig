@@ -23,14 +23,6 @@
                 <th>Phone</th>
                 <td>{{ client.phone }}</td>
             </tr>
-            <tr>
-                <th>Tours</th>
-                <td>
-                    {% for clientTourCost in client.clientTourCosts %}
-                        <a href="{{ path('tour_show', {'id': clientTourCost.tour.id}) }}">{{ clientTourCost.tour }}</a>
-                    {% endfor %}
-                </td>
-            </tr>
         </tbody>
     </table>
 

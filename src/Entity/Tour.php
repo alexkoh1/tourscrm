@@ -34,22 +34,22 @@ class Tour
     private $base_cost;
 
     /**
-     * One Tour has many ClientTourCosts
-     * @ORM\OneToMany(targetEntity="ClientTourCost", mappedBy="tour")
+     * @ORM\OneToMany(targetEntity="App\Entity\Payment", mappedBy="tour")
      */
-    private $clientTourCosts;
+    private $payments;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Client", mappedBy="tours")
+     */
+    private $clients;
 
     /**
      * Client constructor.
      */
     public function __construct()
     {
-        $this->clientTourCosts = new ArrayCollection;
-    }
-
-    public function getClientTourCosts()
-    {
-        return $this->clientTourCosts->toArray();
+        $this->payments = new ArrayCollection();
+        $this->clients = new ArrayCollection();
     }
 
     public function getId()
@@ -100,5 +100,64 @@ class Tour
     public function __toString(): string
     {
         return $this->name.' '.$this->date->format('d-m-Y');
+    }
+
+    /**
+     * @return Collection|Payment[]
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function addPayment(Payment $payment): self
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments[] = $payment;
+            $payment->setTour($this);
+        }
+
+        return $this;
+    }
+
+    public function removePayment(Payment $payment): self
+    {
+        if ($this->payments->contains($payment)) {
+            $this->payments->removeElement($payment);
+            // set the owning side to null (unless already changed)
+            if ($payment->getTour() === $this) {
+                $payment->setTour(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Client[]
+     */
+    public function getClients(): Collection
+    {
+        return $this->clients;
+    }
+
+    public function addClient(Client $client): self
+    {
+        if (!$this->clients->contains($client)) {
+            $this->clients[] = $client;
+            $client->addTour($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClient(Client $client): self
+    {
+        if ($this->clients->contains($client)) {
+            $this->clients->removeElement($client);
+            $client->removeTour($this);
+        }
+
+        return $this;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,17 +34,22 @@ class Client
     private $phone;
 
     /**
-     * One Client has many ClientTourCosts
-     * @ORM\OneToMany(targetEntity="ClientTourCost", mappedBy="client")
+     * @ORM\OneToMany(targetEntity="Payment", mappedBy="client", orphanRemoval=true)
      */
-    private $clientTourCosts;
+    private $payments;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tour", inversedBy="clients")
+     */
+    private $tours;
 
     /**
      * Client constructor.
      */
     public function __construct()
     {
-        $this->clientTourCosts = new ArrayCollection;
+        $this->payments = new ArrayCollection();
+        $this->tours = new ArrayCollection();
     }
 
     public function getId()
@@ -88,23 +94,73 @@ class Client
     }
 
     /**
-     * @return mixed
+     * @return Tour[]
      */
-    public function getClientTourCosts()
+    public function getTours()
     {
-        return $this->clientTourCosts->toArray();
+        return $this->tours->toArray();
     }
 
     /**
-     * @param mixed $clientTourCosts
+     * @param Tour $tour
      */
-    public function setClientTourCosts($clientTourCosts)
+    public function addTour(Tour $tour)
     {
-        $this->clientTourCosts = $clientTourCosts;
+        $this->tours->add($tour);
     }
 
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection|Payment[]
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    /**
+     * @param Payment $payment
+     *
+     * @return Client
+     */
+    public function addPayment(Payment $payment): self
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments[] = $payment;
+            $payment->setClient($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Payment $payment
+     *
+     * @return Client
+     */
+    public function removePayment(Payment $payment): self
+    {
+        if ($this->payments->contains($payment)) {
+            $this->payments->removeElement($payment);
+            // set the owning side to null (unless already changed)
+            if ($payment->getClient() === $this) {
+                $payment->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function removeTour(Tour $tour): self
+    {
+        if ($this->tours->contains($tour)) {
+            $this->tours->removeElement($tour);
+        }
+
+        return $this;
     }
 }
