@@ -51,7 +51,8 @@ class TourController extends Controller
      */
     public function show(Tour $tour): Response
     {
-        return $this->render('tour/show.html.twig', ['tour' => $tour]);
+        return $this->render(
+            'tour/show.html.twig',['tour' => $tour]);
     }
 
     /**

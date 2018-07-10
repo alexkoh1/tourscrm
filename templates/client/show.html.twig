@@ -3,7 +3,7 @@
 {% block title %}Client{% endblock %}
 
 {% block body %}
-    <h1>Client</h1>
+    <h1>{{ client.name }}</h1>
 
     <table class="table">
         <tbody>
@@ -24,6 +24,24 @@
                 <td>{{ client.phone }}</td>
             </tr>
         </tbody>
+    </table>
+    <h4>Список платежей клиента</h4>
+    <table class="table active">
+        {% for payment in client.payments %}
+            <tr>
+                <td>{{ payment.id }}</td>
+                <td>{{ payment.sum }}</td>
+                <td>{{ payment.proccedTime ? payment.proccedTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('payment_show', {'id': payment.id}) }}">show</a>
+                    <a href="{{ path('payment_edit', {'id': payment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
     </table>
 
     <a href="{{ path('client_index') }}">back to list</a>

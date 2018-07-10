@@ -4,12 +4,19 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block head_css %}
+            <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
         {% endblock %}
         {% block head_js %}
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
+            <script src="{{ asset('js/popper.min.js') }}"></script>
         {% endblock %}
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <a href="{{ path('client_index') }}">Список клиентов</a>
+        <a href="{{ path('tour_index') }}">Список туров</a>
+        <a href="{{ path('payment_index') }}">Список платежей</a>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

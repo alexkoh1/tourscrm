@@ -26,6 +26,37 @@
         </tbody>
     </table>
 
+    <h4>Список участников</h4>
+    <table class="table border">
+        {% set total_sum = 0 %}
+        {% for client in tour.clients %}
+            <tr>
+                <td>{{ client.id }}</td>
+                <td><a href="{{ path('client_show', {'id': client.id}) }}">{{ client.name }}</a></td>
+                <td>{{ client.tail }}</td>
+                <td>{{ client.phone }}</td>
+                <td>
+                    {% set client_total_sum = 0 %}
+                    {% for payment in client.payments %}
+                        {% if payment.tour.id == tour.id %}
+                            {% set client_total_sum = client_total_sum + payment.sum %}
+                        {% endif %}
+                    {% endfor %}
+                    {% set total_sum = total_sum + client_total_sum %}
+                    {{ client_total_sum }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td colspan="4" class="text-right">Всего</td>
+                <td>{{ total_sum }}</td>
+            </tr>
+    </table>
+
     <a href="{{ path('tour_index') }}">back to list</a>
 
     <a href="{{ path('tour_edit', {'id': tour.id}) }}">edit</a>

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +38,11 @@ class Payment
      * @ORM\Column(type="datetime")
      */
     private $proccedTime;
+
+    public function __construct()
+    {
+        $this->proccedTime = new DateTime();
+    }
 
     public function getId()
     {

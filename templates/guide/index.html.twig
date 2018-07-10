@@ -1,29 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Client index{% endblock %}
+{% block title %}Guide index{% endblock %}
 
 {% block body %}
-    <h1>Client index</h1>
+    <h1>Guide index</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Tail</th>
                 <th>Phone</th>
+                <th>Photo</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for client in clients %}
+        {% for guide in guides %}
             <tr>
-                <td>{{ client.id }}</td>
-                <td><a href="{{ path('client_show', {'id': client.id}) }}">{{ client.name }}</a></td>
-                <td>{{ client.tail }}</td>
-                <td>{{ client.phone }}</td>
+                <td>{{ guide.id }}</td>
+                <td>{{ guide.name }}</td>
+                <td>{{ guide.phone }}</td>
+                <td>{{ guide.photo }}</td>
                 <td>
-                    <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
+                    <a href="{{ path('guide_show', {'id': guide.id}) }}">show</a>
+                    <a href="{{ path('guide_edit', {'id': guide.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -34,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('client_new') }}">Create new</a>
+    <a href="{{ path('guide_new') }}">Create new</a>
 {% endblock %}
