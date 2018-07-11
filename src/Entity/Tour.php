@@ -44,12 +44,18 @@ class Tour
     private $clients;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Guide", mappedBy="tours")
+     */
+    private $guides;
+
+    /**
      * Client constructor.
      */
     public function __construct()
     {
         $this->payments = new ArrayCollection();
         $this->clients = new ArrayCollection();
+        $this->guides = new ArrayCollection();
     }
 
     public function getId()
@@ -156,6 +162,34 @@ class Tour
         if ($this->clients->contains($client)) {
             $this->clients->removeElement($client);
             $client->removeTour($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Guide[]
+     */
+    public function getGuides(): Collection
+    {
+        return $this->guides;
+    }
+
+    public function addGuide(Guide $guide): self
+    {
+        if (!$this->guides->contains($guide)) {
+            $this->guides[] = $guide;
+            $guide->addTour($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGuide(Guide $guide): self
+    {
+        if ($this->guides->contains($guide)) {
+            $this->guides->removeElement($guide);
+            $guide->removeTour($this);
         }
 
         return $this;

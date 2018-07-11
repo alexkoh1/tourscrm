@@ -3,36 +3,56 @@
 {% block title %}Tour index{% endblock %}
 
 {% block body %}
-    <h1>Tour index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>actions</th>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Base_cost</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for tour in tours %}
-            <tr>
-                <td>
-                    <a href="{{ path('tour_edit', {'id': tour.id}) }}">edit</a>
-                </td>
-                <td>{{ tour.id }}</td>
-                <td><a href="{{ path('tour_show', {'id': tour.id}) }}">{{ tour.name }}</a></td>
-                <td>{{ tour.date ? tour.date|date('Y-m-d') : '' }}</td>
-                <td>{{ tour.baseCost }}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-th-list"></i> Список туров</h1>
+            <p>Table to display analytical data effectively</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item">Tables</li>
+            <li class="breadcrumb-item active"><a href="#">Data Table</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <table class="table table-hover table-bordered" id="sampleTable">
+                        <thead>
+                        <tr>
+                            <th>actions</th>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Base_cost</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for tour in tours %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('tour_edit', {'id': tour.id}) }}">edit</a>
+                                </td>
+                                <td>{{ tour.id }}</td>
+                                <td><a href="{{ path('tour_show', {'id': tour.id}) }}">{{ tour.name }}</a></td>
+                                <td>{{ tour.date ? tour.date|date('Y-m-d') : '' }}</td>
+                                <td>{{ tour.baseCost }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ asset('js/plugins/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/plugins/dataTables.bootstrap.min.js') }}"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
 
     <a href="{{ path('tour_new') }}">Create new</a>
 {% endblock %}

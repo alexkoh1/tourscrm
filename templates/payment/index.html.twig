@@ -10,6 +10,7 @@
                 <th>Id</th>
                 <th>Sum</th>
                 <th>ProccedTime</th>
+                <th>Client</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,6 +20,7 @@
                 <td>{{ payment.id }}</td>
                 <td>{{ payment.sum }}</td>
                 <td>{{ payment.proccedTime ? payment.proccedTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ payment.client.name }}</td>
                 <td>
                     <a href="{{ path('payment_show', {'id': payment.id}) }}">show</a>
                     <a href="{{ path('payment_edit', {'id': payment.id}) }}">edit</a>

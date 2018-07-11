@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,16 @@ class Guide
      * @ORM\Column(type="binary")
      */
     private $photo;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tour", inversedBy="guides")
+     */
+    private $tours;
+
+    public function __construct()
+    {
+        $this->tours = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -68,6 +80,32 @@ class Guide
     public function setPhoto($photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tour[]
+     */
+    public function getTours(): Collection
+    {
+        return $this->tours;
+    }
+
+    public function addTour(Tour $tour): self
+    {
+        if (!$this->tours->contains($tour)) {
+            $this->tours[] = $tour;
+        }
+
+        return $this;
+    }
+
+    public function removeTour(Tour $tour): self
+    {
+        if ($this->tours->contains($tour)) {
+            $this->tours->removeElement($tour);
+        }
 
         return $this;
     }
