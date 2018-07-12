@@ -29,11 +29,6 @@ class Guide
     private $phone;
 
     /**
-     * @ORM\Column(type="binary")
-     */
-    private $photo;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tour", inversedBy="guides")
      */
     private $tours;
@@ -68,18 +63,6 @@ class Guide
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getPhoto()
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto($photo): self
-    {
-        $this->photo = $photo;
 
         return $this;
     }

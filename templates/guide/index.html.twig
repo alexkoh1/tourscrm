@@ -11,7 +11,6 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Phone</th>
-                <th>Photo</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,7 +20,6 @@
                 <td>{{ guide.id }}</td>
                 <td>{{ guide.name }}</td>
                 <td>{{ guide.phone }}</td>
-                <td>{{ guide.photo }}</td>
                 <td>
                     <a href="{{ path('guide_show', {'id': guide.id}) }}">show</a>
                     <a href="{{ path('guide_edit', {'id': guide.id}) }}">edit</a>
@@ -29,7 +27,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

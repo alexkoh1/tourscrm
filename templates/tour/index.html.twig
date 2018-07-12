@@ -35,7 +35,12 @@
                                     <a href="{{ path('tour_edit', {'id': tour.id}) }}">edit</a>
                                 </td>
                                 <td>{{ tour.id }}</td>
-                                <td><a href="{{ path('tour_show', {'id': tour.id}) }}">{{ tour.name }}</a></td>
+                                <td>
+                                    <a href="{{ path('tour_show', {'id': tour.id}) }}">{{ tour.name }}</a>
+                                    {% for guide in tour.guides %}
+                                        <span class="badge badge-info">{{ guide.name }}</span>
+                                    {% endfor %}
+                                </td>
                                 <td>{{ tour.date ? tour.date|date('Y-m-d') : '' }}</td>
                                 <td>{{ tour.baseCost }}</td>
                             </tr>

@@ -14,7 +14,7 @@ class GuideType extends AbstractType
         $builder
             ->add('name')
             ->add('phone')
-            ->add('photo')
+            ->add('tours')
         ;
     }
 
