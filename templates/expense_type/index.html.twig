@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ExpenseType index{% endblock %}
+
+{% block body %}
+    <h1>ExpenseType index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for expense_type in expense_types %}
+            <tr>
+                <td>{{ expense_type.id }}</td>
+                <td>{{ expense_type.name }}</td>
+                <td>
+                    <a href="{{ path('expense_type_show', {'id': expense_type.id}) }}">show</a>
+                    <a href="{{ path('expense_type_edit', {'id': expense_type.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('expense_type_new') }}">Create new</a>
+{% endblock %}

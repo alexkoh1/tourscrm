@@ -49,6 +49,11 @@ class Tour
     private $guides;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Expense", mappedBy="tour")
+     */
+    private $expenses;
+
+    /**
      * Client constructor.
      */
     public function __construct()
@@ -56,6 +61,7 @@ class Tour
         $this->payments = new ArrayCollection();
         $this->clients = new ArrayCollection();
         $this->guides = new ArrayCollection();
+        $this->expenses = new ArrayCollection();
     }
 
     public function getId()
@@ -190,6 +196,37 @@ class Tour
         if ($this->guides->contains($guide)) {
             $this->guides->removeElement($guide);
             $guide->removeTour($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Expense[]
+     */
+    public function getExpenses(): Collection
+    {
+        return $this->expenses;
+    }
+
+    public function addExpense(Expense $expense): self
+    {
+        if (!$this->expenses->contains($expense)) {
+            $this->expenses[] = $expense;
+            $expense->setTour($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExpense(Expense $expense): self
+    {
+        if ($this->expenses->contains($expense)) {
+            $this->expenses->removeElement($expense);
+            // set the owning side to null (unless already changed)
+            if ($expense->getTour() === $this) {
+                $expense->setTour(null);
+            }
         }
 
         return $this;

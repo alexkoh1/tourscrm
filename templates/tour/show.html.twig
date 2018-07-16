@@ -26,50 +26,75 @@
     </div>
 
     <div class="col-md-12">
-    <div class="tile">
-    <h3 class="tile-title">Список участников</h3>
-    <div class="table-responsive">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID клиента</th>
-                <th>ФИО</th>
-                <th>Рост</th>
-                <th>Телефон</th>
-                <th>Оплаты</th>
-        </thead>
-        {% set total_sum = 0 %}
-        {% for client in tour.clients %}
-            <tbody>
-            <tr>
-                <td>{{ client.id }}</td>
-                <td><a href="{{ path('client_show', {'id': client.id}) }}">{{ client.name }}</a></td>
-                <td>{{ client.tail }}</td>
-                <td>{{ client.phone }}</td>
-                <td>
-                    {% set client_total_sum = 0 %}
-                    {% for payment in client.payments %}
-                        {% if payment.tour.id == tour.id %}
-                            {% set client_total_sum = client_total_sum + payment.sum %}
-                        {% endif %}
+        <div class="tile">
+            <h3 class="tile-title">Список участников</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID клиента</th>
+                        <th>ФИО</th>
+                        <th>Рост</th>
+                        <th>Телефон</th>
+                        <th>Оплаты</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set total_sum = 0 %}
+                    {% for client in tour.clients %}
+                    <tr>
+                        <td>{{ client.id }}</td>
+                        <td><a href="{{ path('client_show', {'id': client.id}) }}">{{ client.name }}</a></td>
+                        <td>{{ client.tail }}</td>
+                        <td>{{ client.phone }}</td>
+                        <td>
+                            {% set client_total_sum = 0 %}
+                            {% for payment in client.payments %}
+                                {% if payment.tour.id == tour.id %}
+                                    {% set client_total_sum = client_total_sum + payment.sum %}
+                                {% endif %}
+                            {% endfor %}
+                            {% set total_sum = total_sum + client_total_sum %}
+                            {{ client_total_sum }}
+                        </td>
+                    </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">no records found</td>
+                        </tr>
                     {% endfor %}
-                    {% set total_sum = total_sum + client_total_sum %}
-                    {{ client_total_sum }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-            <tr>
-                <td colspan="4" class="text-right">Всего</td>
-                <td>{{ total_sum }}</td>
-            </tr>
-        </tbody>
-    </table>
+                    <tr>
+                        <td colspan="4" class="text-right">Всего</td>
+                        <td>{{ total_sum }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    </div>
+    <div class="col-md-12">
+        <div class="tile">
+            <h3 class="tile-title">Расходы</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Статья расхода</th>
+                        <th>Сумма</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set total_sum = 0 %}
+                    {% for expense in tour.expenses %}
+                        <tr>
+                            <td>{{ expense.type }}</td>
+                            <td>{{ expense.sum }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <a href="{{ path('tour_index') }}">back to list</a>
