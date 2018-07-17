@@ -44,6 +44,16 @@ class Client
     private $tours;
 
     /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $vk;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $telegram;
+
+    /**
      * Client constructor.
      */
     public function __construct()
@@ -160,6 +170,30 @@ class Client
         if ($this->tours->contains($tour)) {
             $this->tours->removeElement($tour);
         }
+
+        return $this;
+    }
+
+    public function getVk(): ?string
+    {
+        return $this->vk;
+    }
+
+    public function setVk(?string $vk): self
+    {
+        $this->vk = $vk;
+
+        return $this;
+    }
+
+    public function getTelegram(): ?string
+    {
+        return $this->telegram;
+    }
+
+    public function setTelegram(?string $telegram): self
+    {
+        $this->telegram = $telegram;
 
         return $this;
     }
