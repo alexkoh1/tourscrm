@@ -23,8 +23,10 @@
                                 <th>Id</th>
                                 <th>actions</th>
                                 <th>Name</th>
-                                <th>Tail</th>
                                 <th>Phone</th>
+                                <th>vk</th>
+                                <th>telegram</th>
+                                <th>Tail</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,8 +44,10 @@
                                         <span class="badge badge-info">{{ tour.name }}</span>
                                     {% endfor %}
                                 </td>
-                                <td>{{ client.tail }}</td>
                                 <td>{{ client.phone }}</td>
+                                <td>{{ client.vk }}</td>
+                                <td>{{ client.telegram }}</td>
+                                <td>{{ client.tail }}</td>
                             </tr>
                         {% else %}
                             <tr>
