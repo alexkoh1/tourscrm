@@ -45,8 +45,16 @@
                                     {% endfor %}
                                 </td>
                                 <td>{{ client.phone }}</td>
-                                <td>{{ client.vk }}</td>
-                                <td>{{ client.telegram }}</td>
+                                <td>
+                                    {% if client.vk is defined %}
+                                        <a href={{ client.vk }}>{{ client.vk }}</a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if client.telegram is defined %}
+                                        <a target=_blank href=https://t.me/{{ client.telegram }}>@{{ client.telegram }}</a>
+                                    {% endif %}
+                                </td>
                                 <td>{{ client.tail }}</td>
                             </tr>
                         {% else %}
@@ -62,7 +70,10 @@
     </div>
     <script type="text/javascript" src="{{ asset('js/plugins/jquery.dataTables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/plugins/dataTables.bootstrap.min.js') }}"></script>
-    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <script type="text/javascript">$('#sampleTable').DataTable({
+            "order": [[ 0, "desc" ]]
+        });
+    </script>
 
     <a href="{{ path('client_new') }}">Create new</a>
 {% endblock %}

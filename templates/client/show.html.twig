@@ -21,11 +21,19 @@
             </tr>
             <tr>
                 <th>Vk</th>
-                <td>{{ client.vk }}</td>
+                <td>
+                    {% if client.vk is defined %}
+                        <a target=_blank href={{ client.vk }}>{{ client.vk }}</a>
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Telegram</th>
-                <td>{{ client.telegram }}</td>
+                <td>
+                    {% if client.telegram is defined %}
+                        <a target=_blank href=https://t.me/{{ client.telegram }}>@{{ client.telegram }}</a>
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Tail</th>
