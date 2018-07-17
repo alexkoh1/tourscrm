@@ -9,6 +9,20 @@
 		$('.app').toggleClass('sidenav-toggled');
 	});
 
+    // only small screens
+    if($(window).width() <= 600){
+        // show menu on swipe to right
+        $(document).on('swiperight', function(e) {
+            e.preventDefault();
+            $('.app').toggleClass('sidenav-toggled');
+        });
+        // hide menu on swipe to left
+        $(document).on('swipeleft',function(e){
+            e.preventDefault();
+            $('.app').toggleClass('sidenav-toggled');
+        });
+    }
+
 	// Activate sidebar treeview toggle
 	$("[data-toggle='treeview']").click(function(event) {
 		event.preventDefault();
@@ -23,5 +37,8 @@
 
 	//Activate bootstrip tooltips
 	$("[data-toggle='tooltip']").tooltip();
+
+    //Activate jquery-mask-plugin
+	$.jMaskGlobals.watchDataMask = true;
 
 })();

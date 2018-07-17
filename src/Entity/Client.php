@@ -29,7 +29,7 @@ class Client
     private $tail;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=18)
      */
     private $phone;
 

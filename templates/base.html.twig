@@ -19,6 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block head_css %}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+    <link rel="icon" type="image/png" href={{ asset('favicon.png') }}>
     {% endblock %}
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,6 +28,7 @@
         <script src="{{ asset('js/popper.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
+        <script src="{{ asset('js/jquery.mask.js') }}"></script>
     {% endblock %}
 </head>
 <body class="app sidebar-mini rtl">
@@ -93,7 +95,7 @@
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="{{ asset('logo.png') }}" alt="User Image">
         <div>
             <p class="app-sidebar__user-name">InnoActive</p>
             <p class="app-sidebar__user-designation">Наука бомжевать</p>
@@ -105,16 +107,20 @@
                         class="app-menu__label">Клиенты</span></a></li>
         <li><a class="app-menu__item" href="{{ path('tour_index') }}"><i class="app-menu__icon fa fa-plane"></i><span
                         class="app-menu__label">Туры</span></a></li>
-        <li><a class="app-menu__item" href="{{ path('payment_index') }}"><i class="app-menu__icon fa fa-rub"></i><span
-                        class="app-menu__label">Платежи клиентов</span></a></li>
-        <li><a class="app-menu__item" href="{{ path('expense_index') }}"><i class="app-menu__icon fa fa-rub"></i><span
-                        class="app-menu__label">Расходы</span></a></li>
-        <li><a class="app-menu__item" href="{{ path('expense_type_index') }}"><i class="app-menu__icon fa fa-rub"></i><span
-                        class="app-menu__label">Статьи расходов</span></a></li>
         <li><a class="app-menu__item" href="{{ path('guide_index') }}"><i class="app-menu__icon fa fa-male"></i><span
                         class="app-menu__label">Гиды</span></a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa
-        fa-male"></i><span class="app-menu__label">Forms</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        fa-money"></i><span class="app-menu__label">Финансы</span><i class="treeview-indicator fa
+        fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="treeview-item" href="{{ path('payment_index') }}"><i class="icon fa fa-circle-o"></i>
+                        Платежи</a></li>
+                <li><a class="treeview-item" href="{{ path('expense_index') }}"><i class="icon fa fa-circle-o"></i>
+                        Расходы</a></li>
+                <li><a class="treeview-item" href="{{ path('expense_type_index') }}"><i class="icon fa fa-circle-o"></i>
+                        Статьи расходов</a></li>
+            </ul>
+        </li>
     </ul>
 </aside>
 <main class="app-content">
