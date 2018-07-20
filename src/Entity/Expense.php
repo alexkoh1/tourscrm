@@ -33,6 +33,11 @@ class Expense
      */
     private $tour;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Guide", inversedBy="expenses")
+     */
+    private $guide;
+
     public function getId()
     {
         return $this->id;
@@ -70,6 +75,18 @@ class Expense
     public function setTour(?Tour $tour): self
     {
         $this->tour = $tour;
+
+        return $this;
+    }
+
+    public function getGuide(): ?Guide
+    {
+        return $this->guide;
+    }
+
+    public function setGuide(?Guide $guide): self
+    {
+        $this->guide = $guide;
 
         return $this;
     }

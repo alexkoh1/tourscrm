@@ -33,9 +33,15 @@ class Guide
      */
     private $tours;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Expense", mappedBy="guide")
+     */
+    private $expenses;
+
     public function __construct()
     {
         $this->tours = new ArrayCollection();
+        $this->expenses = new ArrayCollection();
     }
 
     public function getId()
@@ -91,5 +97,41 @@ class Guide
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Expense[]
+     */
+    public function getExpenses(): Collection
+    {
+        return $this->expenses;
+    }
+
+    public function addExpense(Expense $expense): self
+    {
+        if (!$this->expenses->contains($expense)) {
+            $this->expenses[] = $expense;
+            $expense->setGuide($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExpense(Expense $expense): self
+    {
+        if ($this->expenses->contains($expense)) {
+            $this->expenses->removeElement($expense);
+            // set the owning side to null (unless already changed)
+            if ($expense->getGuide() === $this) {
+                $expense->setGuide(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

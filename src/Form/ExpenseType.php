@@ -15,6 +15,7 @@ class ExpenseType extends AbstractType
             ->add('sum')
             ->add('type')
             ->add('tour')
+            ->add('guide')
         ;
     }
 
