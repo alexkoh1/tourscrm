@@ -14,8 +14,13 @@ class GuideType extends AbstractType
         $builder
             ->add('name')
             ->add('phone')
-            ->add('tours')
-        ;
+            ->add(
+                'tours',
+                null,
+                [
+                    'attr' => ['data-select' => 'true']
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)

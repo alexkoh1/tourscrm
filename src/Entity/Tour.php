@@ -39,7 +39,8 @@ class Tour
     private $payments;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Client", mappedBy="tours")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Client", inversedBy="clients")
+     * @ORM\JoinTable(name="client_tour")
      */
     private $clients;
 
@@ -59,8 +60,8 @@ class Tour
     public function __construct()
     {
         $this->payments = new ArrayCollection();
-        $this->clients = new ArrayCollection();
-        $this->guides = new ArrayCollection();
+        $this->clients  = new ArrayCollection();
+        $this->guides   = new ArrayCollection();
         $this->expenses = new ArrayCollection();
     }
 

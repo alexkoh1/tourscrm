@@ -32,6 +32,7 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
+                        <th>#</th>
                         <th>ID клиента</th>
                         <th>ФИО</th>
                         <th>Рост</th>
@@ -41,8 +42,10 @@
                     </thead>
                     <tbody>
                     {% set total_sum = 0 %}
+                    {% set total_num = 1 %}
                     {% for client in tour.clients %}
                     <tr>
+                        <td>{{ total_num }}</td>
                         <td>{{ client.id }}</td>
                         <td><a href="{{ path('client_show', {'id': client.id}) }}">{{ client.name }}</a></td>
                         <td>{{ client.tail }}</td>
@@ -55,9 +58,14 @@
                                 {% endif %}
                             {% endfor %}
                             {% set total_sum = total_sum + client_total_sum %}
-                            {{ client_total_sum }}
+                            <span class="client_payment">{{ client_total_sum }}</span>
+                            <input type="text" class="payment_sum">
+                            <button class="add_payment" data-sum="{{ client_total_sum }}" data-client_id="{{ client.id }}" data-tour_id="{{ tour
+                            .id }}">добавить платеж</button>
+                            <p class="greeting-content"></p>
                         </td>
                     </tr>
+                    {% set total_num = total_num + 1 %}
                     {% else %}
                         <tr>
                             <td colspan="5">no records found</td>

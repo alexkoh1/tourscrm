@@ -27,7 +27,13 @@ class ClientType extends AbstractType
             )
             ->add('vk')
             ->add('telegram')
-            ->add('tours')
+            ->add(
+                'tours',
+                null,
+                [
+                    'attr' => ['data-select' => 'true']
+                ]
+            )
         ;
     }
 

@@ -15,8 +15,13 @@ class TourType extends AbstractType
             ->add('name')
             ->add('date')
             ->add('base_cost')
-            ->add('clients')
-        ;
+            ->add(
+                'clients',
+                null,
+                [
+                    'attr' => ['data-select' => 'true']
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -39,7 +39,7 @@ class Client
     private $payments;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tour", inversedBy="clients")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tour", mappedBy="clients")
      */
     private $tours;
 
