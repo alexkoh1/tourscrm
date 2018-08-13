@@ -8,14 +8,13 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180813112707 extends AbstractMigration
+final class Version20180813114638 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
 
-        $this->addSql('DROP TABLE paramaters');
         $this->addSql('DROP INDEX IDX_2D3A8DA6D7ED1D4B');
         $this->addSql('DROP INDEX UNIQ_2D3A8DA6C54C8C93');
         $this->addSql('DROP INDEX IDX_2D3A8DA615ED8D43');
@@ -61,12 +60,11 @@ final class Version20180813112707 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
 
-        $this->addSql('CREATE TABLE paramaters (id INTEGER NOT NULL, name VARCHAR(255) NOT NULL COLLATE BINARY, value VARCHAR(255) DEFAULT NULL COLLATE BINARY, PRIMARY KEY(id))');
         $this->addSql('DROP INDEX IDX_BB4D3A0B15ED8D43');
         $this->addSql('DROP INDEX IDX_BB4D3A0B19EB6921');
         $this->addSql('CREATE TEMPORARY TABLE __temp__client_tour AS SELECT tour_id, client_id FROM client_tour');
         $this->addSql('DROP TABLE client_tour');
-        $this->addSql('CREATE TABLE client_tour (tour_id INTEGER NOT NULL, client_id INTEGER NOT NULL, PRIMARY KEY(tour_id, client_id))');
+        $this->addSql('CREATE TABLE client_tour (tour_id INTEGER NOT NULL, client_id INTEGER NOT NULL, PRIMARY KEY(client_id, tour_id))');
         $this->addSql('INSERT INTO client_tour (tour_id, client_id) SELECT tour_id, client_id FROM __temp__client_tour');
         $this->addSql('DROP TABLE __temp__client_tour');
         $this->addSql('CREATE INDEX IDX_BB4D3A0B15ED8D43 ON client_tour (tour_id)');
