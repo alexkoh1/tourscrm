@@ -58,6 +58,6 @@
 
 $(document).ready(function() {
     $(function() {
-    	$('select[data-select="true"]').select2();
+    	$('select[data-select="true"]').select2({ width: 'resolve' });
     })
 });

@@ -17,7 +17,7 @@ class Expense
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ExpenseType", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\ExpenseType")
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
