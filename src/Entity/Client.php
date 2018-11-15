@@ -29,7 +29,7 @@ class Client
     private $tail;
 
     /**
-     * @ORM\Column(type="string", length=18)
+     * @ORM\Column(type="string", length=18, nullable=true)
      */
     private $phone;
 
@@ -52,6 +52,21 @@ class Client
      * @ORM\Column(type="string", length=30, nullable=true)
      */
     private $telegram;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isLead;
+
+    /**
+     * @ORM\Column(type="string", length=11, nullable=true)
+     */
+    private $vkId;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $bday;
 
     /**
      * Client constructor.
@@ -194,6 +209,42 @@ class Client
     public function setTelegram(?string $telegram): self
     {
         $this->telegram = $telegram;
+
+        return $this;
+    }
+
+    public function getIsLead(): ?bool
+    {
+        return $this->isLead;
+    }
+
+    public function setIsLead(?bool $isLead): self
+    {
+        $this->isLead = $isLead;
+
+        return $this;
+    }
+
+    public function getVkId(): ?string
+    {
+        return $this->vkId;
+    }
+
+    public function setVkId(?string $vkId): self
+    {
+        $this->vkId = $vkId;
+
+        return $this;
+    }
+
+    public function getBday(): ?\DateTimeInterface
+    {
+        return $this->bday;
+    }
+
+    public function setBday(?\DateTimeInterface $bday): self
+    {
+        $this->bday = $bday;
 
         return $this;
     }
