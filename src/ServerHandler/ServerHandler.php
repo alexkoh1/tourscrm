@@ -43,7 +43,6 @@ class ServerHandler extends VKCallbackApiServerHandler {
 
             $client = new Client();
             $client->setName($response[0]['last_name'].' '.$response[0]['first_name'])
-                ->setBday($this->formatDate($response[0]['bdate']))
                 ->setVkId($response[0]['id']);
 
             $this->clientRepository->save($client);
