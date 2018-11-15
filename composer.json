@@ -17,7 +17,8 @@
         "symfony/security-csrf": "^4.1",
         "symfony/twig-bundle": "^4.1",
         "symfony/validator": "^4.1",
-        "symfony/yaml": "^4.1"
+        "symfony/yaml": "^4.1",
+        "vkcom/vk-php-sdk": "^5.80"
     },
     "require-dev": {
         "symfony/dotenv": "^4.1",
