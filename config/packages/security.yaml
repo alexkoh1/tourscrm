@@ -15,7 +15,7 @@ security:
                         roles: 'ROLE_ADMIN'
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js|vk)/
             security: false
         main:
             anonymous: ~

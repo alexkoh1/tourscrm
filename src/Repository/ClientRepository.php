@@ -19,6 +19,12 @@ class ClientRepository extends ServiceEntityRepository
         parent::__construct($registry, Client::class);
     }
 
+    public function save(Client $client)
+    {
+        $this->_em->persist($client);
+        $this->_em->flush($client);
+    }
+
 //    /**
 //     * @return Client[] Returns an array of Client objects
 //     */
