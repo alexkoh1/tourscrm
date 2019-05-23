@@ -132,6 +132,7 @@ class Client
     public function addTour(Tour $tour)
     {
         $this->tours->add($tour);
+        $tour->addClient($this);
     }
 
     public function __toString()
