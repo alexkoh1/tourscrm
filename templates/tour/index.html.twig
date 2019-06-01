@@ -25,6 +25,9 @@
                             <th>Id</th>
                             <th>Name</th>
                             <th>Date</th>
+                            <th>Revenue</th>
+                            <th>Expenses</th>
+                            <th>Profit</th>
                             <th>Base_cost</th>
                         </tr>
                         </thead>
@@ -42,6 +45,17 @@
                                     {% endfor %}
                                 </td>
                                 <td>{{ tour.date ? tour.date|date('Y-m-d') : '' }}</td>
+                                {% set sum = 0 %}
+                                {% for payment in tour.payments %}
+                                    {% set sum = sum + payment.sum %}
+                                {% endfor %}
+                                <td>{{ sum }}</td>
+                                {% set expenses = 0 %}
+                                {% for expense in tour.expenses %}
+                                    {% set expenses = expenses + expense.sum %}
+                                {% endfor %}
+                                <td>{{ expenses }}</td>
+                                <td>{{ sum - expenses }}
                                 <td>{{ tour.baseCost }}</td>
                             </tr>
                         {% else %}

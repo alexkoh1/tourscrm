@@ -1,0 +1,55 @@
+{% block title %}Tour summary{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <section class="invoice">
+                    <div class="col-4">
+                        <strong>Дата: </strong><p>{{ tour.date|date("Y-m-d") }}</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="tile">
+            <h3 class="tile-title">Список участников</h3>
+            <div class="table-responsive">
+                <table border="1">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>ФИО</th>
+                        <th>Vk</th>
+                        <th>Tg</th>
+                        <th>Рост</th>
+                        <th>Телефон</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set total_sum = 0 %}
+                    {% set total_num = 1 %}
+                    {% for client in tour.clients %}
+                        <tr>
+                            <td>{{ total_num }}</td>
+                            <td>{{ client.name }}</td>
+                            <td><a target = _blank href="{{ client.vk }}">{{ client.vk }}</a></td>
+                            <td><a target = _blank href="https://tlgg.ru/{{ client.telegram }}">@{{ client.telegram }}</a></td>
+                            <td>{{ client.tail }}</td>
+                            <td><a href="tel:{{ client.phone }}">{{ client.phone }}</a></td>
+                        </tr>
+                        {% set total_num = total_num + 1 %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

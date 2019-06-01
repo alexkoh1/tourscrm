@@ -16,6 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class TourController extends Controller
 {
     /**
+     * @Route("/{id}/summary", name="tour_summary", methods="GET")
+     */
+    public function summary(Tour $tour): Response
+    {
+        return $this->render('tour/summary.html.twig', ['tour' => $tour]);
+    }
+
+    /**
      * @Route("/", name="tour_index", methods="GET")
      */
     public function index(ToursRepository $toursRepository): Response

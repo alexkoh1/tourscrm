@@ -34,6 +34,8 @@
         var client_id = $(this).data('client_id');
         var tour_id = $(this).data('tour_id');
         var previous_sum = $(this).data('sum');
+        var previous_total_sum = $(".total_payments").text();
+
         var request = {
             "client": client_id,
             "tour": tour_id,
@@ -46,10 +48,12 @@
 			url: "/api/add_payment",
 			data: request,
 			success: function(data) {
-                var total = data.payment + parseInt(previous_sum);
+                var total_client = data.payment + parseInt(previous_sum);
 
-                $span.siblings('.client_payment').text(total);
+				$(".total_payments").text(parseInt(previous_total_sum) + data.payment);
+                $span.siblings('.client_payment').text(total_client);
                 console.log($span.siblings('.client_payment'));
+                console.log(previous_total_sum);
 			}
         });
 	})
